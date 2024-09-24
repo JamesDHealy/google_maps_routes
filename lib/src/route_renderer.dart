@@ -28,13 +28,15 @@ class MapsRoutes {
   ) async {
     late PolylinePoints routePoints = PolylinePoints();
     List<LatLng> routeCoordinates = [];
+    PolylineRequest polylineRequest = PolylineRequest(
+        origin: PointLatLng(startLat, startLon),
+        destination: PointLatLng(endLat, endLon),
+        mode: travelMode);
 
     /// If the coordinates are not null, it creates a route between the two points
     PolylineResult result = await routePoints.getRouteBetweenCoordinates(
-      googleApiKey,
-      PointLatLng(startLat, startLon),
-      PointLatLng(endLat, endLon),
-      travelMode: travelMode,
+      request: polylineRequest,
+      googleApiKey: googleApiKey,
     );
 
     /// Adds coordinates to the route coordinates list
